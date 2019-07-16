@@ -1,7 +1,7 @@
 from google.cloud import bigquery
 import sys
 client = bigquery.Client()
-dataset_id = 'sys.argv[1]'
+dataset_id = sys.argv[1]
 
 dataset_ref = client.dataset(dataset_id)
 job_config = bigquery.LoadJobConfig()
