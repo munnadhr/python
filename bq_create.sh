@@ -36,4 +36,7 @@ else
     gcloud config set project $Project
     bq_create
 fi
+
+#Load data to the Tabled
+python bq_dataload.py $Dataset $Table
     
