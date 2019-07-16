@@ -22,9 +22,9 @@ function bq_create() {
  }
 
 if [ "$current_project" == "$Project" ];then
-    bq_create()
+    bq_create
 else
     gcloud config set project $Project
-    bq_create()
+    bq_create
 fi
     
