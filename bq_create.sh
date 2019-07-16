@@ -6,6 +6,12 @@ export Dataset=$3
 export Table=$4
 current_project=$(gcloud config get-value project)
 gcloud auth activate-service-account terraform@openshift.iam.gserviceaccount.com --key-file=$5 --project=$Project
+if [ $? -eq 0 ];then
+        echo "Service account terraform@openshift.iam.gserviceaccount.com is activated on $Project"
+else
+        echo "Service account is not activated"
+        exit
+fi
 
 function bq_create() {
         bq mk $Dataset
