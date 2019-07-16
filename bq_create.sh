@@ -3,6 +3,7 @@
 export Project=$1
 export Region=$2
 current_project=$(gcloud config get-value project)
+gcloud auth activate-service-account terraform@openshift.iam.gserviceaccount.com --key-file=$5
 
 function bq_create() {
         bq mk $3
