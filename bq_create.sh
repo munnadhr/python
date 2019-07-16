@@ -2,22 +2,24 @@
 
 export Project=$1
 export Region=$2
+export Dataset=$3
+export Table=$4
 current_project=$(gcloud config get-value project)
 gcloud auth activate-service-account terraform@openshift.iam.gserviceaccount.com --key-file=$5 --project=$Project
 
 function bq_create() {
-        bq mk $3
+        bq mk $Dataset
         if [ $? -eq 0 ];then
-            echo "Dataset $3 created under $Project"
-            bq mk $3.$4
+            echo "Dataset $Dataset created under $Project"
+            bq mk ${Dataset}.${Table}
             if [ $? -eq 0 ];then
-                echo "Table $4 has been created under Dataset $3"
+                echo "Table $Table has been created under Dataset $Dataset"
             else
-                echo "Table $4 is not created"
+                echo "Table $Table is not created"
                 exit
             fi
         else
-            echo "Dataset $3 unable to create"
+            echo "Dataset $Dataset unable to create"
             exit
         fi
  }
