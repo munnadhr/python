@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export Project=$1
-export Region=$2
+export Bucket="$2"
 export Dataset=$3
 export Table=$4
 current_project=$(gcloud config get-value project)
@@ -37,6 +37,5 @@ else
     bq_create
 fi
 
-#Load data to the Tabled
-python bq_dataload.py $Dataset $Table
-    
+#Load data to the Table
+bq load --autodetect --source_format=CSV ${Dataset}.${Table} $Bucket 
